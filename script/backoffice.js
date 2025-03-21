@@ -25,10 +25,10 @@ const monsterInput = document.getElementById("monster");
 const imageUrlInput = document.getElementById("imageUrl");
 const priceInput = document.getElementById("price");
 
-const productUrl = "https://striveschool-api.herokuapp.com/api/product/";
+const productURL = "https://striveschool-api.herokuapp.com/api/product/";
 
 if (itemID) {
-  fetch(productUrl + "/" + itemID)
+  fetch(productURL + "/" + itemID)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -67,7 +67,7 @@ form.addEventListener("submit", function (e) {
   let methodToUse;
   let URLtoUse;
 
-  if (eventID) {
+  if (itemID) {
     methodToUse = "PUT";
     URLtoUse = productURL + "/" + itemID;
   } else {
@@ -97,17 +97,17 @@ form.addEventListener("submit", function (e) {
 });
 
 // Pulsante di reset per il form
-const resetButton = document.getElementById("reset-button");
-resetButton.addEventListener("click", function () {
-  form.reset(); // Resetta il form
-});
+//const resetButton = document.getElementById("reset-button");
+//resetButton.addEventListener("click", function () {
+//  form.reset(); // Resetta il form
+//});
 
 // Pulsante di eliminazione del prodotto
 const deleteButton = document.getElementById("delete-button");
 if (deleteButton) {
   deleteButton.addEventListener("click", function () {
     if (itemID) {
-      fetch(productUrl + "/" + itemID, {
+      fetch(productURL + "/" + itemID, {
         method: "DELETE",
         headers: {
           Authorization:

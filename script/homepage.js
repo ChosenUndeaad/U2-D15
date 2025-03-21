@@ -1,3 +1,11 @@
+//Funzione per la data nel footer
+const dateFooter = function () {
+  const footerSpan = document.getElementById("year");
+  footerSpan.innerText = new Date().getFullYear();
+};
+
+dateFooter();
+
 const getShopItems = function () {
   fetch("https://striveschool-api.herokuapp.com/api/product/", {
     headers: {
@@ -16,7 +24,7 @@ const getShopItems = function () {
       console.log("Dati ricevuti:", data);
 
       const row = document.getElementById("shop-cards");
-      row.innerHTML = "";
+      row.innerHTML = ""; // Pulisce i contenuti esistenti
 
       data.forEach((item) => {
         row.innerHTML += `
@@ -25,7 +33,7 @@ const getShopItems = function () {
               <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.description}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">Vai ai dettagli</a>
               </div>
             </div>
           `;
@@ -35,3 +43,5 @@ const getShopItems = function () {
       console.error("ERRORE:", error);
     });
 };
+
+getShopItems();
