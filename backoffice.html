@@ -12,6 +12,125 @@
     />
   </head>
   <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="https://static.wikia.nocookie.net/xenbox/images/2/2d/MH-Guild_Crest.png"
+              alt="Logo"
+              width="30"
+              height="30"
+              class="d-inline-block align-text-top"
+            />
+            Smithy's Forge
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Backoffice</a
+                >
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-danger" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- MAIN -->
+    <main class="flex-grow-1">
+      <h1 class="text-center">Smithy's Forge</h1>
+      <h2 class="text-center">Amministrazione</h2>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col col-12 col-lg-6 col-md-8">
+            <form class="my-3" id="item-form">
+              <div class="mb-3">
+                <label for="name" class="form-label">Set Armatura o Arma</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  id="name"
+                  aria-describedby="nameHelp"
+                  placeholder="Anja Alpha +"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Mostro</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  id="name"
+                  aria-describedby="nameHelp"
+                  placeholder="Anjanath"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Descrizione</label>
+                <textarea
+                  class="form-control"
+                  required
+                  id="description"
+                  aria-describedby="descriptionHelp"
+                  placeholder="Materiali necessari, abilità, statistiche..."
+                  rows="5"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Prezzo</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  required
+                  id="price"
+                  aria-describedby="priceHelp"
+                  placeholder="10"
+                />
+              </div>
+              <button type="submit" class="btn btn-danger">Invia</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- FOOTER -->
+    <footer class="bg-dark text-center py-3">
+      <p class="text-light m-0">
+        Diritti riservati alla Gilda -
+        <span class="text-ligh" id="year"></span>
+      </p>
+    </footer>
+    <!-- SCRIPT -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
