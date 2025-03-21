@@ -1,5 +1,3 @@
-//Il codice funziona sugli elementi generati ma non sui 3 in sampleData
-
 // Sample data
 const sampleData = [
   {
@@ -22,12 +20,13 @@ const sampleData = [
     name: "Savage Jho Alpha +",
     description:
       "Savage Jho Alpha + Armor Set in Monster Hunter World (MHW) mhw-iceborne-icon-16pxIceborne is a Master Rank Armor Set added with the expansion. Sets are comprised of five different pieces, and can be complemented with Decorations, Charms, Weapons and Mantles. s have special effects when equipped, and combine Skills depending on the pieces equipped.",
-    price: "105000",
+    price: 105000,
     imageUrl:
       "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/savage-jho-alpha-plus-set-mhw-wiki-guide.png",
   },
 ];
 
+// Anno
 const dateFooter = function () {
   const footerSpan = document.getElementById("year");
   footerSpan.innerText = new Date().getFullYear();
@@ -38,7 +37,7 @@ dateFooter();
 const getShopItems = function () {
   const row = document.getElementById("shop-cards");
 
-  // Card
+  // Card template
   const createCard = (item) => {
     return `
       <div class="col col-12 col-lg-3 col-md-4 col-sm-6" id="item-${item._id}">
@@ -49,19 +48,19 @@ const getShopItems = function () {
             <p class="card-text">${item.description}</p>
             <p class="card-text">${item.price} Z</p>
             <a href="./details.html?id=${item._id}" class="btn btn-danger">Dettagli</a>
-            <button class="btn btn-warning mt-2" onclick="deleteItem('${item._id}')">Elimina</button>
           </div>
         </div>
       </div>
     `;
   };
 
-  // Samples
-  sampleData.forEach((item) => {
+  // Sample data
+  sampleData.forEach((item, index) => {
+    item._id = `sample-${index + 1}`;
     row.innerHTML += createCard(item);
   });
 
-  // API data
+  //API
   fetch("https://striveschool-api.herokuapp.com/api/product/", {
     headers: {
       Authorization:
@@ -78,7 +77,6 @@ const getShopItems = function () {
     .then((data) => {
       console.log("Dati ricevuti:", data);
 
-      // Update page with the actual fetched data
       data.forEach((item) => {
         row.innerHTML += createCard(item);
       });
@@ -86,14 +84,6 @@ const getShopItems = function () {
     .catch((error) => {
       console.error("ERRORE:", error);
     });
-};
-
-// Function to delete an item
-const deleteItem = (itemId) => {
-  const itemToDelete = document.getElementById(`item-${itemId}`);
-  if (itemToDelete) {
-    itemToDelete.remove();
-  }
 };
 
 getShopItems();
