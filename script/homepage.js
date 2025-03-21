@@ -1,4 +1,33 @@
-//Funzione per la data nel footer
+//Il codice funziona sugli elementi generati ma non sui 3 in sampleData
+
+// Sample data
+const sampleData = [
+  {
+    name: "Blackveil Hazak Alpha +",
+    description:
+      "Blackveil Hazak Alpha + Armor Set in Monster Hunter World (MHW) mhw-iceborne-icon-16pxIceborne is a Master Rank Armor Set added with the expansion. Sets are comprised of five different pieces, and can be complemented with Decorations, Charms, Weapons and Mantles. s have special effects when equipped, and combine Skills depending on the pieces equipped.",
+    price: 105000,
+    imageUrl:
+      "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/blackveil-hazak-alpha-plus-mhw-wiki-guide.png",
+  },
+  {
+    name: "Raging Brachy Alpha +",
+    description:
+      "Raging Brachy Alpha + Armor Set in Monster Hunter World (MHW) mhw-iceborne-icon-16pxIceborne is a Master Rank Armor Set added with the expansion. Sets are comprised of five different pieces, and can be complemented with Decorations, Charms, Weapons and Mantles. s have special effects when equipped, and combine Skills depending on the pieces equipped.",
+    price: 120000,
+    imageUrl:
+      "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/raging-brachy-alpha-mhw-wiki-guide1.png",
+  },
+  {
+    name: "Savage Jho Alpha +",
+    description:
+      "Savage Jho Alpha + Armor Set in Monster Hunter World (MHW) mhw-iceborne-icon-16pxIceborne is a Master Rank Armor Set added with the expansion. Sets are comprised of five different pieces, and can be complemented with Decorations, Charms, Weapons and Mantles. s have special effects when equipped, and combine Skills depending on the pieces equipped.",
+    price: "105000",
+    imageUrl:
+      "https://monsterhunterworld.wiki.fextralife.com/file/Monster-Hunter-World/savage-jho-alpha-plus-set-mhw-wiki-guide.png",
+  },
+];
+
 const dateFooter = function () {
   const footerSpan = document.getElementById("year");
   footerSpan.innerText = new Date().getFullYear();
@@ -7,6 +36,32 @@ const dateFooter = function () {
 dateFooter();
 
 const getShopItems = function () {
+  const row = document.getElementById("shop-cards");
+
+  // Card
+  const createCard = (item) => {
+    return `
+      <div class="col col-12 col-lg-3 col-md-4 col-sm-6" id="item-${item._id}">
+        <div class="card">
+          <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}">
+          <div class="card-body">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-text">${item.description}</p>
+            <p class="card-text">${item.price} Z</p>
+            <a href="./details.html?id=${item._id}" class="btn btn-danger">Dettagli</a>
+            <button class="btn btn-warning mt-2" onclick="deleteItem('${item._id}')">Elimina</button>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  // Samples
+  sampleData.forEach((item) => {
+    row.innerHTML += createCard(item);
+  });
+
+  // API data
   fetch("https://striveschool-api.herokuapp.com/api/product/", {
     headers: {
       Authorization:
@@ -23,28 +78,22 @@ const getShopItems = function () {
     .then((data) => {
       console.log("Dati ricevuti:", data);
 
-      const row = document.getElementById("shop-cards");
-      row.innerHTML = ""; // Pulisce i contenuti esistenti
-
+      // Update page with the actual fetched data
       data.forEach((item) => {
-        row.innerHTML += `
-           <div class="col col-12 col-lg-3 col-md-4 col-sm-6">
-            <div class="card">
-              <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}">
-              <div class="card-body">
-                <h5 class="card-title">${item.name}</h5>
-                <p class="card-text">${item.description}</p>
-                <p class="card-text">${item.price} Z</p>
-                <a href="./details.html?id=${item._id}" class="btn btn-danger">Dettagli</a>
-              </div>
-            </div>
-          </div>
-          `;
+        row.innerHTML += createCard(item);
       });
     })
     .catch((error) => {
       console.error("ERRORE:", error);
     });
+};
+
+// Function to delete an item
+const deleteItem = (itemId) => {
+  const itemToDelete = document.getElementById(`item-${itemId}`);
+  if (itemToDelete) {
+    itemToDelete.remove();
+  }
 };
 
 getShopItems();
