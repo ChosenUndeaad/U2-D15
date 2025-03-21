@@ -56,7 +56,7 @@ form.addEventListener("submit", function (e) {
     nameInput.value,
     descriptionInput.value,
     monsterInput.value,
-    imageUrlInput.value,
+    //imageUrlInput.value,
     priceInput.value
   );
 
