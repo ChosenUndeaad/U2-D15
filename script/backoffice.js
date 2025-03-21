@@ -16,11 +16,11 @@ class ShopItem {
   }
 }
 
-const nameInpupt = document.getElementById("name");
-const descriptionInpupt = document.getElementById("description");
-const monsterInpupt = document.getElementById("monster");
-const imageUrlInpupt = document.getElementById("imageUrl");
-const priceInpupt = document.getElementById("price");
+const nameInput = document.getElementById("name");
+const descriptionInput = document.getElementById("description");
+const monsterInput = document.getElementById("monster");
+const imageUrlInput = document.getElementById("imageUrl");
+const priceInput = document.getElementById("price");
 
 const productUrl = "https://striveschool-api.herokuapp.com/api/product/";
 
