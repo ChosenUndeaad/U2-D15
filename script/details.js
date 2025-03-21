@@ -10,7 +10,13 @@ const itemID = URLparameters.get("id");
 const itemsURL = "https://striveschool-api.herokuapp.com/api/product";
 
 const getItemDetails = function () {
-  fetch(itemsURL + "/" + itemID)
+  fetch(itemsURL + "/" + itemID, {
+    method: "GET",
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMmI3NzM4MzRiZjAwMTUwMDA3MDMiLCJpYXQiOjE3NDI1NDc4MzEsImV4cCI6MTc0Mzc1NzQzMX0.Q4xSc4mZgUIHI4V4U51iyFFW96LvAkLylYjDRlTDPvc",
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Errore nel recupero dettagli");

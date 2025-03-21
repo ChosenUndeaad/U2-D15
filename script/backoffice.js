@@ -80,7 +80,7 @@ form.addEventListener("submit", function (e) {
     method: methodToUse,
     body: JSON.stringify(newItem),
     headers: {
-      "Content-Type": "application/json", // Ensure content type is correct
+      "Content-Type": "application/json",
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMmI3NzM4MzRiZjAwMTUwMDA3MDMiLCJpYXQiOjE3NDI1NDc4MzEsImV4cCI6MTc0Mzc1NzQzMX0.Q4xSc4mZgUIHI4V4U51iyFFW96LvAkLylYjDRlTDPvc",
     },
