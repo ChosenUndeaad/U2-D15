@@ -16,6 +16,9 @@ class ShopItem {
   }
 }
 
+const URLparameters = new URLSearchParams(location.search);
+const itemID = URLparameters.get("id");
+
 const nameInput = document.getElementById("name");
 const descriptionInput = document.getElementById("description");
 const monsterInput = document.getElementById("monster");
@@ -92,3 +95,35 @@ form.addEventListener("submit", function (e) {
       console.log("ERRORE", error);
     });
 });
+
+// Pulsante di reset per il form
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", function () {
+  form.reset(); // Resetta il form
+});
+
+// Pulsante di eliminazione del prodotto
+const deleteButton = document.getElementById("delete-button");
+if (deleteButton) {
+  deleteButton.addEventListener("click", function () {
+    if (itemID) {
+      fetch(productUrl + "/" + itemID, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMmI3NzM4MzRiZjAwMTUwMDA3MDMiLCJpYXQiOjE3NDI1NDc4MzEsImV4cCI6MTc0Mzc1NzQzMX0.Q4xSc4mZgUIHI4V4U51iyFFW96LvAkLylYjDRlTDPvc",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("Prodotto eliminato con successo!");
+          } else {
+            throw new Error("Errore nella cancellazione");
+          }
+        })
+        .catch((error) => {
+          console.log("ERRORE", error);
+        });
+    }
+  });
+}
