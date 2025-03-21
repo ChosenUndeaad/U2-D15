@@ -7,12 +7,12 @@ const dateFooter = function () {
 dateFooter();
 
 class ShopItem {
-  constructor(_name, _description, _monster, _imageUrl, _price) {
+  constructor(_name, _description, _price, _imageUrl, _brand) {
     this.name = _name;
     this.description = _description;
-    this.monster = _monster;
-    this.imageUrl = _imageUrl;
     this.price = _price;
+    this.imageUrl = _imageUrl;
+    this.brand = _brand;
   }
 }
 
@@ -21,11 +21,12 @@ const itemID = URLparameters.get("id");
 
 const nameInput = document.getElementById("name");
 const descriptionInput = document.getElementById("description");
-const monsterInput = document.getElementById("monster");
-const imageUrlInput = document.getElementById("imageUrl");
+// Removed monsterInput
+const imageUrlInput = document.getElementById("imageUrl"); // Added this input
 const priceInput = document.getElementById("price");
+const brandInput = document.getElementById("brand"); // Added this input
 
-const productURL = "https://striveschool-api.herokuapp.com/api/product/";
+const productURL = "https://striveschool-api.herokuapp.com/api/product";
 
 if (itemID) {
   fetch(productURL + "/" + itemID)
@@ -39,9 +40,9 @@ if (itemID) {
     .then((data) => {
       nameInput.value = data.name;
       descriptionInput.value = data.description;
-      monsterInput.value = data.monster;
-      imageUrlInput.value = data.imageUrl;
+      imageUrlInput.value = data.imageUrl; // Set imageUrl field
       priceInput.value = data.price;
+      brandInput.value = data.brand; // Set brand field
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -55,14 +56,14 @@ form.addEventListener("submit", function (e) {
   const newItem = new ShopItem(
     nameInput.value,
     descriptionInput.value,
-    monsterInput.value,
-    //imageUrlInput.value,
-    priceInput.value
+    parseFloat(priceInput.value), // Ensure price is a number
+    imageUrlInput.value, // Added imageUrl
+    brandInput.value // Added brand
   );
 
   console.log("NEW ITEM", newItem);
 
-  //salviamolo nel DB
+  // Save to the DB
 
   let methodToUse;
   let URLtoUse;
@@ -79,6 +80,7 @@ form.addEventListener("submit", function (e) {
     method: methodToUse,
     body: JSON.stringify(newItem),
     headers: {
+      "Content-Type": "application/json", // Ensure content type is correct
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMmI3NzM4MzRiZjAwMTUwMDA3MDMiLCJpYXQiOjE3NDI1NDc4MzEsImV4cCI6MTc0Mzc1NzQzMX0.Q4xSc4mZgUIHI4V4U51iyFFW96LvAkLylYjDRlTDPvc",
     },
@@ -95,12 +97,6 @@ form.addEventListener("submit", function (e) {
       console.log("ERRORE", error);
     });
 });
-
-// Pulsante di reset per il form
-//const resetButton = document.getElementById("reset-button");
-//resetButton.addEventListener("click", function () {
-//  form.reset(); // Resetta il form
-//});
 
 // Pulsante di eliminazione del prodotto
 const deleteButton = document.getElementById("delete-button");

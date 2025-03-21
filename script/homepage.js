@@ -28,14 +28,18 @@ const getShopItems = function () {
 
       data.forEach((item) => {
         row.innerHTML += `
-            <div class="card" style="width: 18rem;">
+           <div class="col col-12 col-lg-3 col-md-4 col-sm-6">
+            <div class="card">
               <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}">
               <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.description}</p>
-                <a href="#" class="btn btn-primary">Vai ai dettagli</a>
+                <p class="card-text">${item.price} Z</p>
+                <a href="./details.html?id=${item._id}" class="btn btn-danger">Vai ai dettagli</a>
+                <a href="./backoffice.html?id=${item._id}" class="btn btn-warning">Modifica</a>
               </div>
             </div>
+          </div>
           `;
       });
     })
