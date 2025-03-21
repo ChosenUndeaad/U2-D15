@@ -5,10 +5,11 @@ const dateFooter = function () {
 };
 dateFooter();
 
+const itemsURL = "https://striveschool-api.herokuapp.com/api/product";
 const URLparameters = new URLSearchParams(location.search);
 const itemID = URLparameters.get("id");
-const itemsURL = "https://striveschool-api.herokuapp.com/api/product";
 
+// Funzione per recuperare i dettagli del prodotto
 const getItemDetails = function () {
   fetch(itemsURL + "/" + itemID, {
     method: "GET",
@@ -44,25 +45,37 @@ const getItemDetails = function () {
 
 // Funzione per modificare l'oggetto
 const editItem = function () {
-  location.assign("./backoffice.html?id=" + itemID);
+  if (itemID) {
+    location.assign("./backoffice.html?id=" + itemID);
+  } else {
+    console.error("Item ID is missing.");
+  }
 };
 
 // Funzione per eliminare l'oggetto con conferma
 const deleteItem = function () {
-  if (confirm("Sei sicuro di voler eliminare questo prodotto?")) {
-    fetch(itemsURL + "/" + itemID, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Eliminazione non riuscita");
-        }
-        alert("Prodotto eliminato con successo!");
-        location.assign("./homepage.html");
+  if (itemID) {
+    if (confirm("Sei sicuro di voler eliminare questo prodotto?")) {
+      fetch(itemsURL + "/" + itemID, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkMmI3NzM4MzRiZjAwMTUwMDA3MDMiLCJpYXQiOjE3NDI1NDc4MzEsImV4cCI6MTc0Mzc1NzQzMX0.Q4xSc4mZgUIHI4V4U51iyFFW96LvAkLylYjDRlTDPvc",
+        },
       })
-      .catch((error) => {
-        console.error("Errore durante l'eliminazione", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Eliminazione non riuscita");
+          }
+          alert("Prodotto eliminato con successo!");
+          location.assign("./homepage.html");
+        })
+        .catch((error) => {
+          console.error("Errore durante l'eliminazione", error);
+        });
+    }
+  } else {
+    console.error("Item ID is missing.");
   }
 };
 
