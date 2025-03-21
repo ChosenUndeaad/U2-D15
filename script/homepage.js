@@ -35,9 +35,7 @@ const getShopItems = function () {
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.description}</p>
                 <p class="card-text">${item.price} Z</p>
-                <a href="./details.html?id=${item._id}" class="btn btn-danger">Dettagli</a>
-                <a href="./backoffice.html?id=${item._id}" class="btn btn-warning">Modifica</a>
-                <a class="btn btn-light text-secondary" id="delete-button" >Elimina</a>
+                <a href="./details.html?id=${item.id}" class="btn btn-danger">Dettagli</a>
               </div>
             </div>
           </div>
